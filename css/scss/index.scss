@@ -1,0 +1,89 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  box-sizing: border-box;
+  font-family: 黑體-繁, Apple LiGothic Medium, PingFang, 微軟正黑體, Microsoft JhengHei, WenQuanYi Zen Hei, helvetica, Arial, sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+#app {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+// *bubbles
+$bubblesNum: 700;
+$bubbleTopY: -77vh;
+$colorList:(#E8E8E8, #FED286, #F7B649, #F46C00, #F46C00, #798DB2, linear-gradient(to right, #FFC28A 0%, #FFAC7C 100%), linear-gradient(to right, #929DC0 0%, #AC84CA 100%));
+
+.bubble {
+  border-radius: 50%;
+  position: absolute;
+  will-change: transform;
+}
+
+@for $i from 1 through $bubblesNum {
+  $size: 3vmin + random(2vmin); // min 3 max 5 (vw)
+  $goTopSpeed: (650s + random(2350s)) / 1000; // 0.65~3s
+  $delaySwag: 2.85s + (random(4s) / 10);
+
+  .bubble {
+    &:nth-child(#{$i}) {
+      width: $size;
+      height: $size;
+      background: nth($colorList, random(length($colorList))); // nth($list,$n)
+      left: (-3% + random(102%)); // -3~99%
+      top: (-3% + random(101%)); // -3~98%
+      opacity: (6 + random(4)) / 10; // 0.6~1
+      transition: transform $goTopSpeed;
+      animation: bubbleGoTop $goTopSpeed forwards, bubbleSwag infinite alternate linear 1s $delaySwag;
+
+      // TODO animation / delay
+    }
+  }
+}
+
+@keyframes bubbleGoTop {
+  0% {
+    transform: translate(0, 0) translateZ(0);
+    opacity: 0;
+  }
+
+  // TODO 看要不要試著從這裡下手
+  // 33% {
+  //   transform: translateX(-5%);
+  // }
+
+  // 67% {
+  //   transform: translateX(0%);
+  // }
+
+  100% {
+    transform: translate(0, -77vh) translateZ(0);
+  }
+}
+
+@keyframes bubbleSwag {
+  0% {
+    transform: translate(0%, -77vh) translateZ(0);
+  }
+
+  33% {
+    transform: translate(-5%, -77vh) translateZ(0);
+  }
+
+  67% {
+    transform: translate(0%, -77vh) translateZ(0);
+  }
+
+  100% {
+    transform: translate(5%, -77vh) translateZ(0);
+  }
+}
