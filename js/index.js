@@ -17,6 +17,7 @@ const createBubbles = () => {
     appFrag.appendChild(bubbleFrame)
   }
 
+  console.log(appFrag)
   app.appendChild(appFrag)
 }
 
