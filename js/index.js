@@ -6,9 +6,14 @@ let bubbleNum = 700
 
 const createBubbles = () => {
   for (let i = 0; i < bubbleNum; i++) {
+    const bubbleFrame = document.createElement("div")
     const bubble = document.createElement("div")
+
+    bubbleFrame.classList.add("bubble-frame")
     bubble.classList.add("bubble")
-    appFrag.appendChild(bubble)
+
+    bubbleFrame.appendChild(bubble)
+    appFrag.appendChild(bubbleFrame)
   }
 
   app.appendChild(appFrag)

@@ -23,31 +23,42 @@ $bubblesNum: 700;
 $bubbleTopY: -77vh;
 $colorList:(#E8E8E8, #FED286, #F7B649, #F46C00, #F46C00, #798DB2, linear-gradient(to right, #FFC28A 0%, #FFAC7C 100%), linear-gradient(to right, #929DC0 0%, #AC84CA 100%));
 
-.bubble {
-  border-radius: 50%;
+
+.bubble-frame {
   position: absolute;
-  will-change: transform;
+  will-change: transform opacity;
+}
+
+.bubble {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  will-change: transform opacity;
 }
 
 @for $i from 1 through $bubblesNum {
   $size: 3vmin + random(2vmin); // min 3 max 5 (vw)
   $goTopSpeed: (650s + random(2350s)) / 1000; // 0.65~3s
-  $delaySwag: 2.85s + (random(4s) / 10);
+  $delaySwag: 0.1s + (random(4s) / 10); // 0.1~0.5s
 
-  .bubble {
+  .bubble-frame {
     &:nth-child(#{$i}) {
       width: $size;
       height: $size;
-      background: nth($colorList, random(length($colorList))); // nth($list,$n)
       left: (-3% + random(102%)); // -3~99%
       top: (-3% + random(101%)); // -3~98%
-      opacity: (6 + random(4)) / 10; // 0.6~1
-      transition: transform $goTopSpeed;
-      animation: bubbleGoTop $goTopSpeed forwards, bubbleSwag infinite alternate linear 1s $delaySwag;
+      animation: bubbleGoTop $goTopSpeed forwards;
 
-      // TODO animation / delay
+      .bubble {
+        background: nth($colorList, random(length($colorList))); // nth($list,$n)
+        opacity: (6 + random(4)) / 10; // 0.6~1
+        animation: bubbleSwag infinite alternate linear 1s $delaySwag;
+      }
     }
+
   }
+
+
 }
 
 @keyframes bubbleGoTop {
@@ -56,14 +67,9 @@ $colorList:(#E8E8E8, #FED286, #F7B649, #F46C00, #F46C00, #798DB2, linear-gradien
     opacity: 0;
   }
 
-  // TODO 看要不要試著從這裡下手
-  // 33% {
-  //   transform: translateX(-5%);
-  // }
-
-  // 67% {
-  //   transform: translateX(0%);
-  // }
+  50% {
+    opacity: 1;
+  }
 
   100% {
     transform: translate(0, -77vh) translateZ(0);
@@ -72,18 +78,18 @@ $colorList:(#E8E8E8, #FED286, #F7B649, #F46C00, #F46C00, #798DB2, linear-gradien
 
 @keyframes bubbleSwag {
   0% {
-    transform: translate(0%, -77vh) translateZ(0);
+    transform: translateX(0%);
   }
 
   33% {
-    transform: translate(-5%, -77vh) translateZ(0);
+    transform: translateX(-5%);
   }
 
   67% {
-    transform: translate(0%, -77vh) translateZ(0);
+    transform: translateX(0%);
   }
 
   100% {
-    transform: translate(5%, -77vh) translateZ(0);
+    transform: translateX(5%);
   }
 }
