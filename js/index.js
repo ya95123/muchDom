@@ -13,11 +13,11 @@ const createBubbles = () => {
     bubble.classList.add("bubble")
 
     bubbleFrame.appendChild(bubble)
-    app.appendChild(bubbleFrame)
-    // appFrag.appendChild(bubbleFrame)
+    // app.appendChild(bubbleFrame)
+    appFrag.appendChild(bubbleFrame)
   }
 
-  // app.appendChild(appFrag)
+  app.appendChild(appFrag)
 }
 
 createBubbles()
