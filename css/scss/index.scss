@@ -26,14 +26,14 @@ $colorList:(#E8E8E8, #FED286, #F7B649, #F46C00, #F46C00, #798DB2, linear-gradien
 
 .bubble-frame {
   position: absolute;
-  will-change: transform opacity;
+  will-change: transform;
 }
 
 .bubble {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  will-change: transform opacity margin;
+  will-change: transform margin;
 }
 
 @for $i from 1 through $bubblesNum {
