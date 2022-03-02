@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>多個 Dom</title>
+  <link rel="stylesheet" href="css/marginSwag.css">
+  <script>
+    function measureCRP() {
+      var t = window.performance.timing,
+        interactive = t.domInteractive - t.domLoading,
+        dcl = t.domContentLoadedEventStart - t.domLoading,
+        complete = t.domComplete - t.domLoading;
+      var stats = document.createElement('p');
+      stats.textContent = 'interactive: ' + interactive + 'ms, ' +
+        'dcl: ' + dcl + 'ms, complete: ' + complete + 'ms';
+      document.body.appendChild(stats);
+    }
+  </script>
+</head>
+
+<body onload="measureCRP()">
+  <div id="app"></div>
+
+  <script src="js/index.js"></script>
+</body>
+
+</html>
